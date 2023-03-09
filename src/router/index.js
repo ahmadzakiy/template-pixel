@@ -10,18 +10,12 @@ const routes = [
     name: "home",
     component: HomeView,
   },
-  {
-    path: "/add",
-    name: "add",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AddonContent.vue"),
-  },
-  {
-    path: "/category",
-    name: "category",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Category.vue"),
-  },
+  // {
+  //   path: "/category",
+  //   name: "category",
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ "../views/Category.vue"),
+  // },
 ];
 
 const router = new VueRouter({

@@ -1,109 +1,152 @@
 <template>
   <mp-box>
+    <mp-flex direction="column" mb="6">
+      <mp-text font-size="xl" font-weight="semibold">Export history</mp-text>
+      <mp-text color="gray.600"
+        >Once exported, each exporter can download the file in their
+        email.</mp-text
+      >
+    </mp-flex>
+    <mp-flex justify="space-between" mb="6">
+      <mp-flex gap="1">
+        <mp-box width="240px">
+          <AdvancedCalendar />
+        </mp-box>
+        <mp-box width="240px">
+          <mp-autocomplete
+            v-model="status"
+            :data="['All status', 'Complete', 'In progress', 'Canceled']"
+            :contentStyle="{ width: '240px' }"
+          />
+        </mp-box>
+      </mp-flex>
+      <mp-input-group width="24opx">
+        <mp-input-left-addon :with-background="false">
+          <mp-icon name="search" size="sm" />
+        </mp-input-left-addon>
+        <mp-input placeholder="Search exporter name" />
+      </mp-input-group>
+    </mp-flex>
     <mp-table-container width="full" max-width="full" overflow="scroll">
       <mp-table>
         <mp-table-head>
           <mp-table-row cursor="pointer">
             <mp-table-cell as="th">
-              Category
+              File name
               <mp-icon name="sort-default" />
             </mp-table-cell>
-            <mp-table-cell as="th" colspan="2">
-              Add-ons name
+            <mp-table-cell as="th">
+              Exporter
               <mp-icon name="sort-default" />
             </mp-table-cell>
+            <mp-table-cell as="th">
+              Exporte date
+              <mp-icon name="sort-default" />
+            </mp-table-cell>
+            <mp-table-cell as="th">
+              Status
+              <mp-icon name="sort-default" />
+            </mp-table-cell>
+            <mp-table-cell as="th"> </mp-table-cell>
           </mp-table-row>
         </mp-table-head>
         <mp-table-body>
           <mp-table-row>
-            <mp-table-cell as="td">HRIS</mp-table-cell>
+            <mp-table-cell as="td"
+              >ChatHistory-02022023-105155.csv</mp-table-cell
+            >
+            <mp-table-cell as="td">Christin Purnama Sari</mp-table-cell>
+            <mp-table-cell as="td">2 Feb 2023 at 10:51</mp-table-cell>
             <mp-table-cell as="td">
-              Talenta form, Talenta portal, Talenta performance reviews
+              <mp-badge variant="subtle" variant-color="orange">
+                In progress
+              </mp-badge>
             </mp-table-cell>
             <mp-table-cell as="td" text-align="right">
-              <mp-button variant="outline" @click="onEditModalToggle(true)">
-                Edit
-              </mp-button>
+              <mp-button variant="ghost"> Cancel </mp-button>
             </mp-table-cell>
           </mp-table-row>
           <mp-table-row>
-            <mp-table-cell as="td">Productivity</mp-table-cell>
+            <mp-table-cell as="td"
+              >ChatHistory-02022023-105155.csv</mp-table-cell
+            >
+            <mp-table-cell as="td">Rizal Chandra</mp-table-cell>
+            <mp-table-cell as="td">2 Feb 2023 at 10:51</mp-table-cell>
             <mp-table-cell as="td">
-              Talenta form, Talenta portal, Recruitment, Flex benefit
+              <mp-badge variant="subtle" variant-color="green">
+                Completed
+              </mp-badge>
             </mp-table-cell>
-            <mp-table-cell as="td" text-align="right">
-              <mp-button variant="outline">Edit</mp-button>
-            </mp-table-cell>
+            <mp-table-cell as="td" text-align="right"> </mp-table-cell>
           </mp-table-row>
           <mp-table-row>
-            <mp-table-cell as="td">Payroll</mp-table-cell>
+            <mp-table-cell as="td"
+              >ChatHistory-ddmmyyyy-hhmmss.csv</mp-table-cell
+            >
+            <mp-table-cell as="td">Rizal Chandra</mp-table-cell>
+            <mp-table-cell as="td">30 Jan 2023 at 11:33</mp-table-cell>
             <mp-table-cell as="td">
-              Talenta payroll disbursement, SAP, Odoo, Dynamics365, Expense
-              management
+              <mp-badge variant="subtle" variant-color="gray">
+                Canceled
+              </mp-badge>
             </mp-table-cell>
-            <mp-table-cell as="td" text-align="right">
-              <mp-button variant="outline">Edit</mp-button>
-            </mp-table-cell>
-          </mp-table-row>
-          <mp-table-row>
-            <mp-table-cell as="td">Accounting</mp-table-cell>
-            <mp-table-cell as="td">
-              Integration with Jurnal, Integration with Moka, Integration with
-              Hellobill
-            </mp-table-cell>
-            <mp-table-cell as="td" text-align="right">
-              <mp-button variant="outline">Edit</mp-button>
-            </mp-table-cell>
+            <mp-table-cell as="td" text-align="right"> </mp-table-cell>
           </mp-table-row>
         </mp-table-body>
       </mp-table>
     </mp-table-container>
-
-    <CategoryPagination />
-    <CategoryEditModal
-      :isModalOpen="isEditModalOpen"
-      :onModalToggle="onEditModalToggle"
-    />
-    <CategoryDeleteModal
-      :isModalOpen="isDeleteModalOpen"
-      :onModalToggle="onDeleteModalToggle"
-    />
+    <TablePagination />
   </mp-box>
 </template>
 
 <script>
 import {
   MpBox,
+  MpFlex,
+  MpText,
   MpIcon,
   MpButton,
+  MpBadge,
+  MpInput,
+  MpInputGroup,
+  MpInputLeftAddon,
   MpTableContainer,
   MpTable,
   MpTableHead,
   MpTableBody,
   MpTableRow,
   MpTableCell,
+  MpAutocomplete,
 } from "@mekari/pixel";
-import CategoryPagination from "./CategoryPagination";
-import CategoryEditModal from "./CategoryEditModal";
+
+import TablePagination from "../components/TablePagination";
+import AdvancedCalendar from "../components/AdvancedCalendar";
 
 export default {
   name: "ExportHistory",
   components: {
     MpBox,
+    MpFlex,
+    MpText,
     MpIcon,
     MpButton,
+    MpBadge,
+    MpInput,
+    MpInputGroup,
+    MpInputLeftAddon,
     MpTableContainer,
     MpTable,
     MpTableHead,
     MpTableBody,
     MpTableRow,
     MpTableCell,
-    CategoryPagination,
-    CategoryEditModal,
+    MpAutocomplete,
+    TablePagination,
+    AdvancedCalendar,
   },
   data() {
     return {
-      isEditModalOpen: false,
+      status: "All status",
     };
   },
   methods: {},

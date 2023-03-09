@@ -21,7 +21,7 @@
             padding-y="2"
             :_hover="{ backgroundColor: 'ice.50' }"
           >
-            <mp-text font-weight="600" line-height="md">10</mp-text>
+            <mp-text font-weight="600" line-height="md">100</mp-text>
             <mp-icon name="caret-down" size="sm" />
           </mp-button>
         </mp-tooltip>
@@ -31,7 +31,7 @@
           padding-left="5"
           padding-y="1"
         >
-          Showing 120-130 of 242
+          Showing 1-3 of 3
         </mp-text>
       </mp-flex>
       <mp-flex align-items="center">
@@ -52,7 +52,7 @@
           padding-right="4"
           padding-y="1"
         >
-          of 24 page
+          of 1 page
         </mp-text>
         <mp-tooltip label="Prev page" position="bottom">
           <mp-button-icon name="chevrons-left" size="sm" padding-right="1" />
@@ -78,7 +78,7 @@ import {
 } from "@mekari/pixel";
 
 export default {
-  name: "CategoryPagination",
+  name: "TablePagination",
   components: {
     MpFlex,
     MpBox,
