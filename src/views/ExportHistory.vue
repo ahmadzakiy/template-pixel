@@ -63,7 +63,9 @@
               </mp-badge>
             </mp-table-cell>
             <mp-table-cell as="td" text-align="right">
-              <mp-button variant="ghost"> Cancel </mp-button>
+              <mp-button variant="ghost" @click="handleOpenModal">
+                Cancel
+              </mp-button>
             </mp-table-cell>
           </mp-table-row>
           <mp-table-row>
@@ -96,6 +98,38 @@
       </mp-table>
     </mp-table-container>
     <TablePagination />
+
+    <mp-modal :is-open="isModalOpen" close-on-overlay-click>
+      <mp-modal-content width="330px">
+        <mp-modal-header>Cancel export ?</mp-modal-header>
+        <mp-modal-close-button @click="handleCloseModal" />
+        <mp-modal-body>
+          <mp-text>
+            Your export history will still be displayed after canceling.
+          </mp-text>
+        </mp-modal-body>
+        <mp-box
+          as="footer"
+          display="flex"
+          :pt="2"
+          :px="4"
+          :pb="4"
+          justifyContent="flex-end"
+          data-pixel-component="MpModalFooter"
+        >
+          <mp-button variant="ghost" margin-right="3" @click="handleCloseModal"
+            >Continue export</mp-button
+          >
+          <mp-button
+            variant="solid"
+            variant-color="red"
+            @click="handleCloseModal"
+            >Cancel</mp-button
+          >
+        </mp-box>
+      </mp-modal-content>
+      <mp-modal-overlay />
+    </mp-modal>
   </mp-box>
 </template>
 
@@ -117,6 +151,12 @@ import {
   MpTableRow,
   MpTableCell,
   MpAutocomplete,
+  MpModal,
+  MpModalOverlay,
+  MpModalContent,
+  MpModalHeader,
+  MpModalBody,
+  MpModalCloseButton,
 } from "@mekari/pixel";
 
 import TablePagination from "../components/TablePagination";
@@ -141,14 +181,28 @@ export default {
     MpTableRow,
     MpTableCell,
     MpAutocomplete,
+    MpModal,
+    MpModalOverlay,
+    MpModalContent,
+    MpModalHeader,
+    MpModalBody,
+    MpModalCloseButton,
     TablePagination,
     AdvancedCalendar,
   },
   data() {
     return {
       status: "All status",
+      isModalOpen: false,
     };
   },
-  methods: {},
+  methods: {
+    handleOpenModal() {
+      this.isModalOpen = true;
+    },
+    handleCloseModal() {
+      this.isModalOpen = false;
+    },
+  },
 };
 </script>
