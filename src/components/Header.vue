@@ -14,7 +14,13 @@
       align-items="center"
     >
       <mp-flex gap="6">
-        <mp-box as="router-link" to="/" margin-y="1" width="123px" height="40px">
+        <mp-box
+          as="router-link"
+          to="/"
+          margin-y="1"
+          width="123px"
+          height="40px"
+        >
           <img src="../assets/logo-qontak-default.svg" alt="" />
           <!-- <mp-icon name="mekari-brand" size="lg" /> -->
         </mp-box>
@@ -51,13 +57,13 @@
                 </mp-text>
               </mp-box>
               <mp-popover-list-item>
-                CRM
+                Omnichannel
                 <mp-icon name="check" size="sm" margin-right="2" />
               </mp-popover-list-item>
-              <mp-popover-list-item> Chatbot </mp-popover-list-item>
+              <mp-popover-list-item> CRM </mp-popover-list-item>
               <mp-popover-list-item>
                 <mp-box>
-                  Report
+                  Chatbot
                   <mp-badge margin-left="2">New</mp-badge>
                 </mp-box>
               </mp-popover-list-item>
